@@ -1,0 +1,2 @@
+# Este archivo reemplaza al .dockerignore de la raíz SOLO para fallas/03-secreto/Dockerfile.
+# Está vacío a propósito: simula un proyecto sin .dockerignore, así .env y .git entran a la imagen.

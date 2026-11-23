@@ -1,0 +1,17 @@
+# Lo que NO debe viajar al contexto de construcción ni terminar en la imagen
+.git
+.gitignore
+.env
+.env.*
+!.env.ejemplo
+**/__pycache__
+**/*.pyc
+.venv
+venv
+tests
+fallas
+docs
+scripts
+*.md
+.devcontainer
+compose*.yaml

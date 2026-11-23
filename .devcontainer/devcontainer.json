@@ -1,0 +1,12 @@
+{
+  "name": "Villa Nube · Nube Intermedio",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "API de Trámites" }
+  },
+  "postCreateCommand": "cp -n .env.ejemplo .env && chmod +x scripts/*.sh"
+}
