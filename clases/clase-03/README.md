@@ -17,7 +17,7 @@ Hoy una parte de tu proyecto queda dentro de un contenedor: algo que cualquier p
 - [ ] En Windows: Git Bash (viene con Git) para escribir los comandos.
 - [ ] Tu lienzo de la Clase 2 a mano.
 
-**¿No pudiste instalar Docker?** En la página de este repositorio en GitHub: botón **Code** → **Codespaces** → **Create codespace on main**. Se abre un editor en el navegador que ya trae Docker. Si tampoco funciona, trabaja en pareja con alguien de tu sala.
+**¿No pudiste instalar Docker?** En la página de este repositorio en GitHub: botón **Code** → **Codespaces** → **Create codespace on main**. Se abre un editor en el navegador que ya trae Docker; en su terminal escribe `cd clases/clase-03/villa-nube`. Si tampoco funciona, trabaja en pareja con alguien de tu sala.
 
 **Las 8 palabras de hoy**
 
@@ -32,7 +32,7 @@ Hoy una parte de tu proyecto queda dentro de un contenedor: algo que cualquier p
 | Volumen | Un lugar para guardar datos fuera del contenedor | `datos-tramites` |
 | Compose | Un archivo que enciende varios contenedores juntos | `docker compose up` |
 
-**El laboratorio: Villa Nube.** Es la API de Trámites de la alcaldía ficticia de la Clase 2 y vive en la raíz de este repositorio. Es un caso inventado: no uses datos personales reales ni claves de tu trabajo.
+**El laboratorio: Villa Nube.** Es la API de Trámites de la alcaldía ficticia de la Clase 2 y vive en la carpeta [`villa-nube/`](villa-nube/README.md) de esta clase. Todos los comandos de Villa Nube se ejecutan dentro de esa carpeta. Es un caso inventado: no uses datos personales reales ni claves de tu trabajo.
 
 ## Ejercicio 1 · ¿Qué vas a empaquetar y cómo sabrás que funciona?
 
@@ -109,11 +109,11 @@ Si algo no salió, escribe en el chat el comando que usaste y el error exacto.
 **Paso 1 · Descarga el repositorio**
 
 ```bash
-git clone https://github.com/dlemusg/Estud-IA-Nube-Int.git villa-nube
-cd villa-nube
+git clone https://github.com/dlemusg/Estud-IA-Nube-Int.git estudia-nube
+cd estudia-nube/clases/clase-03/villa-nube
 ```
 
-**Paso 2 · Lee el [Dockerfile](../../Dockerfile)** (ábrelo en tu editor). Esta es su versión corta, traducida:
+**Paso 2 · Lee el [Dockerfile](villa-nube/Dockerfile)** (ábrelo en tu editor). Esta es su versión corta, traducida:
 
 | Línea | En palabras |
 | --- | --- |
@@ -161,7 +161,7 @@ docker rm -f vn
 
 ## Ejercicio 4 · Completa el Dockerfile
 
-*En equipo · práctica guiada, parte B · 15 minutos.* Abre [`docs/Dockerfile.plantilla`](../../docs/Dockerfile.plantilla) y completa cada `___` con una palabra del banco. Cada palabra se usa una vez.
+*En equipo · práctica guiada, parte B · 15 minutos.* Abre [`docs/Dockerfile.plantilla`](villa-nube/docs/Dockerfile.plantilla) y completa cada `___` con una palabra del banco. Cada palabra se usa una vez.
 
 **Banco de palabras:** `python:3.12-slim` · `/app` · `app/requirements.txt` · `requirements.txt` · `app/` · `8080` · `0.0.0.0`
 
@@ -188,7 +188,7 @@ EXPOSE ___
 CMD ["gunicorn", "--bind", "___:8080", "app:app"]
 ```
 
-Guárdalo en la raíz del repositorio como `Dockerfile.mio` y constrúyelo:
+Guárdalo en la carpeta `villa-nube` como `Dockerfile.mio` y constrúyelo:
 
 ```bash
 docker build -f Dockerfile.mio -t villa-nube/tramites:0.1.0 .
@@ -228,7 +228,7 @@ Cuando son muchas variables, se escriben en un archivo `.env`. Ese archivo **nun
 
 ## Lo que vas a ver: Compose y volúmenes
 
-Cuando una aplicación necesita varios contenedores, por ejemplo una API y su base de datos, se describen juntos en un archivo [`compose.yaml`](../../compose.yaml) y se encienden con un solo comando. Hoy el profesor lo muestra; escribir tu propio `compose.yaml` es un reto opcional.
+Cuando una aplicación necesita varios contenedores, por ejemplo una API y su base de datos, se describen juntos en un archivo [`compose.yaml`](villa-nube/compose.yaml) y se encienden con un solo comando. Hoy el profesor lo muestra; escribir tu propio `compose.yaml` es un reto opcional.
 
 ```mermaid
 flowchart LR
@@ -283,19 +283,19 @@ Regla corta: **ARG vive solo mientras se construye. ENV vive también cuando cor
 | Hago `docker compose down` y luego `up`. ¿Sigue la solicitud que radiqué? | |
 | ¿Y si hago `docker compose down -v`? | |
 
-Para probarlo tú mismo: [`docs/ejemplos/`](../../docs/ejemplos/README.md) tiene los tres ejemplos con sus comandos.
+Para probarlo tú mismo: [`villa-nube/docs/ejemplos/`](villa-nube/docs/ejemplos/README.md) tiene los tres ejemplos con sus comandos.
 
 ## Ejercicio 7 · Tu proyecto en un contenedor
 
 *Individual o con tu equipo de proyecto · 45 minutos.* Ahora lo haces con la parte que elegiste en el ejercicio 1.
 
-**Paso 1 · Elige tu plantilla.** Están en [`docs/plantillas/`](../../docs/plantillas/). Cópiala a la carpeta de tu proyecto con el nombre `Dockerfile`.
+**Paso 1 · Elige tu plantilla.** Están en [`villa-nube/docs/plantillas/`](villa-nube/docs/plantillas/). Cópiala a la carpeta de tu proyecto con el nombre `Dockerfile`.
 
 | Tu proyecto es… | Usa | Puerto típico |
 | --- | --- | --- |
-| Python: Flask, FastAPI | [`Dockerfile.python`](../../docs/plantillas/Dockerfile.python) | 8080 o 5000 |
-| Node.js: Express | [`Dockerfile.node`](../../docs/plantillas/Dockerfile.node) | 3000 |
-| Sitio web estático: HTML, CSS, JavaScript | [`Dockerfile.web-estatica`](../../docs/plantillas/Dockerfile.web-estatica) | 80 |
+| Python: Flask, FastAPI | [`Dockerfile.python`](villa-nube/docs/plantillas/Dockerfile.python) | 8080 o 5000 |
+| Node.js: Express | [`Dockerfile.node`](villa-nube/docs/plantillas/Dockerfile.node) | 3000 |
+| Sitio web estático: HTML, CSS, JavaScript | [`Dockerfile.web-estatica`](villa-nube/docs/plantillas/Dockerfile.web-estatica) | 80 |
 | Otro lenguaje | Pide la plantilla en la sala de clínica | — |
 
 **Paso 2 · Cambia lo que dice CAMBIA** en la plantilla: el puerto y el comando que arranca tu aplicación.
@@ -313,7 +313,7 @@ Cambia los dos `8080` por el puerto de tu aplicación si es otro. Para un sitio 
 
 **Paso 4 · Comprueba tus dos pruebas** del ejercicio 1 y anota si pasaron.
 
-**Paso 5 · Escribe tu README** con la plantilla [`docs/plantillas/README-plantilla.md`](../../docs/plantillas/README-plantilla.md).
+**Paso 5 · Escribe tu README** con la plantilla [`villa-nube/docs/plantillas/README-plantilla.md`](villa-nube/docs/plantillas/README-plantilla.md).
 
 **Paso 6 · Súbelo a GitHub** con `git add`, `git commit` y `git push`.
 
@@ -389,7 +389,7 @@ En la Clase 4, GitHub va a construir y probar tu proyecto solo, cada vez que lo 
 **Retos opcionales, si terminas antes**
 
 - Escribe un `compose.yaml` para tu proyecto con su base de datos (guíate por el de Villa Nube).
-- Resuelve las fallas preparadas en la carpeta [`fallas/`](../../fallas/README.md).
+- Resuelve las fallas preparadas en la carpeta [`fallas/`](villa-nube/fallas/README.md).
 - Agrega a tu imagen un usuario sin privilegios y un archivo `.dockerignore`.
 - Compara `/salud` y `/listo` de Villa Nube con la base de datos apagada: `docker compose stop db`.
 - Ayuda a otra persona de tu sala: explicar es la mejor forma de aprender.

@@ -1,12 +1,12 @@
 {
-  "name": "Villa Nube · Nube Intermedio",
+  "name": "Estud-IA · Nube Intermedio",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "forwardPorts": [8080],
   "portsAttributes": {
-    "8080": { "label": "API de Trámites" }
+    "8080": { "label": "Aplicación del laboratorio" }
   },
-  "postCreateCommand": "cp -n .env.ejemplo .env && chmod +x scripts/*.sh"
+  "postCreateCommand": "chmod +x clases/*/villa-nube/scripts/*.sh 2>/dev/null || true"
 }
