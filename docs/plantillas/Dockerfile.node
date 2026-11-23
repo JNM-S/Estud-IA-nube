@@ -1,0 +1,19 @@
+# Plantilla · aplicación Node.js (Express u otro servidor)
+# Cópiala a la raíz de TU proyecto con el nombre Dockerfile y cambia lo que dice CAMBIA.
+FROM node:22-slim
+
+WORKDIR /app
+
+# Primero la lista de librerías, después el código
+COPY package*.json ./
+# Si no tienes package-lock.json, usa: RUN npm install --omit=dev
+RUN npm ci --omit=dev
+
+COPY . .
+
+# CAMBIA: el puerto en el que escucha tu aplicación
+EXPOSE 3000
+
+# CAMBIA: el archivo que arranca tu aplicación.
+# Importante: app.listen(3000, "0.0.0.0") o app.listen(3000) (Express escucha en todas por defecto)
+CMD ["node", "index.js"]

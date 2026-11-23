@@ -1,0 +1,10 @@
+# Plantilla · sitio web estático (HTML, CSS y JavaScript, sin servidor propio)
+# Cópiala a la raíz de TU proyecto con el nombre Dockerfile.
+# CAMBIA "sitio/" por la carpeta donde está tu index.html.
+FROM nginx:1.27-alpine
+
+COPY sitio/ /usr/share/nginx/html/
+
+EXPOSE 80
+# nginx ya trae su comando de arranque: no hace falta CMD.
+# Ejecutar:  docker run -d -p 8080:80 --name mi-sitio mi-sitio:0.1.0   y abrir http://localhost:8080

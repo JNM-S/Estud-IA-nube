@@ -1,0 +1,28 @@
+# Plantilla para la práctica guiada · Clase 3
+# Completa cada ___ con una palabra del BANCO DE PALABRAS. Cada palabra se usa una vez.
+#
+#   BANCO DE PALABRAS:   python:3.12-slim   /app   app/requirements.txt   requirements.txt   app/   8080   0.0.0.0
+#
+# Cuando termines, guárdalo en la raíz del repositorio con el nombre Dockerfile y construye:
+#   docker build -t villa-nube/tramites:0.1.0 .
+
+# 1. ¿Desde qué imagen empezamos? (Python ya instalado, versión pequeña)
+FROM ___
+
+# 2. ¿En qué carpeta de la imagen vamos a trabajar?
+WORKDIR ___
+
+# 3. Primero copiamos solo la lista de librerías...
+COPY ___ .
+
+# 4. ...y las instalamos
+RUN pip install --no-cache-dir -r ___
+
+# 5. Después copiamos el código de la aplicación
+COPY ___ .
+
+# 6. ¿En qué puerto escucha la aplicación?
+EXPOSE ___
+
+# 7. ¿Cómo arranca? Debe escuchar en TODAS las interfaces del contenedor
+CMD ["gunicorn", "--bind", "___:8080", "app:app"]
