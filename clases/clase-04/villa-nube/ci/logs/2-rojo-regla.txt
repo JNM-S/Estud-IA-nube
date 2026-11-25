@@ -1,0 +1,42 @@
+Ejecución guardada · Clase 4 · Villa Nube CI · resultado: ROJO
+Disparador: push a main · commit e4f5a6b «Amplía la vigencia de los documentos»
+Cambio del commit (app/app.py):
+-   DIAS_VIGENCIA = int(os.getenv("DIAS_VIGENCIA_DOCUMENTO", "90"))
++   DIAS_VIGENCIA = int(os.getenv("DIAS_VIGENCIA_DOCUMENTO", "900"))
+
+=== Job: Pruebas del código ✗ (31 s) ===
+✓ Set up job
+✓ Descargar el código del repositorio
+✓ Instalar Python 3.12
+✓ Instalar las librerías
+✗ Correr las pruebas
+  Run pytest -v
+  ============================= test session starts ==============================
+  platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0
+  collected 5 items
+
+  tests/test_app.py::test_salud_informa_version PASSED                     [ 20%]
+  tests/test_app.py::test_listo_con_base_disponible PASSED                 [ 40%]
+  tests/test_app.py::test_radicar_y_consultar PASSED                       [ 60%]
+  tests/test_app.py::test_documento_vencido_se_rechaza FAILED              [ 80%]
+  tests/test_app.py::test_ciudadano_obligatorio PASSED                     [100%]
+
+  =================================== FAILURES ===================================
+  ______________________ test_documento_vencido_se_rechaza _______________________
+
+      def test_documento_vencido_se_rechaza(cliente):
+          viejo = (date.today() - timedelta(days=91)).isoformat()
+          r = cliente.post("/solicitudes", json={"ciudadano": "Ana", "fecha_documento": viejo})
+  >       assert r.status_code == 422
+  E       assert 201 == 422
+  E        +  where 201 = <WrapperTestResponse streamed [201 CREATED]>.status_code
+
+  tests/test_app.py:47: AssertionError
+  =========================== short test summary info ============================
+  FAILED tests/test_app.py::test_documento_vencido_se_rechaza - assert 201 == 422
+  ========================= 1 failed, 4 passed in 0.13s ==========================
+  Error: Process completed with exit code 1.
+✓ Complete job
+
+=== Job: Imagen y prueba de humo ⊘ (omitido) ===
+  Este job no corrió: depende de "Pruebas del código" (needs: pruebas), que falló.

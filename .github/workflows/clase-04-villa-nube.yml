@@ -1,0 +1,77 @@
+# Clase 4 · Integración continua de Villa Nube
+# Cada vez que alguien cambia la carpeta clases/clase-04/villa-nube, GitHub:
+#   1. corre las pruebas del código (job "pruebas")
+#   2. si pasan, construye la imagen, la enciende y repite las pruebas
+#      de la Clase 3 contra el contenedor (job "imagen")
+# Si algo falla, el check queda en rojo y el log dice dónde.
+
+name: Clase 4 · Villa Nube CI
+
+# DISPARADOR: cuándo corre el workflow
+on:
+  push:
+    paths:
+      - "clases/clase-04/villa-nube/**"
+      - ".github/workflows/clase-04-villa-nube.yml"
+  pull_request:
+    paths:
+      - "clases/clase-04/villa-nube/**"
+      - ".github/workflows/clase-04-villa-nube.yml"
+  # Botón "Run workflow" en la pestaña Actions
+  workflow_dispatch:
+
+# PERMISOS: el workflow solo puede leer el repositorio, nada más
+permissions:
+  contents: read
+
+# Todos los comandos "run" se ejecutan dentro de la carpeta del laboratorio
+defaults:
+  run:
+    working-directory: clases/clase-04/villa-nube
+
+jobs:
+  # JOB 1 · Pruebas del código, sin Docker
+  pruebas:
+    name: Pruebas del código
+    # RUNNER: una máquina Linux limpia que GitHub presta para cada ejecución
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v6
+
+      - name: Instalar Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Instalar las librerías
+        run: pip install -r app/requirements.txt -r requirements-dev.txt
+
+      - name: Correr las pruebas
+        run: pytest -v
+
+  # JOB 2 · La imagen funciona igual que en la Clase 3
+  imagen:
+    name: Imagen y prueba de humo
+    # Solo corre si el job "pruebas" terminó en verde
+    needs: pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v6
+
+      # La etiqueta es el código del commit: cada imagen dice de qué cambio salió
+      - name: Construir la imagen
+        run: docker build --build-arg APP_VERSION=${{ github.sha }} -t villa-nube/tramites:${{ github.sha }} .
+
+      - name: Encender el contenedor
+        run: docker run -d -p 8080:8080 --name vn villa-nube/tramites:${{ github.sha }}
+
+      # Las mismas pruebas de aceptación de la Clase 3, ahora contra el contenedor
+      - name: Prueba de humo
+        run: bash scripts/verificar.sh
+
+      # Este paso solo corre si algo falló: muestra lo que escribió la aplicación
+      - name: Logs del contenedor (si algo falló)
+        if: failure()
+        run: docker logs vn

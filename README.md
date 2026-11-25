@@ -11,7 +11,7 @@ Repositorio de trabajo del curso **Capa 2 · Arquitectura en la nube, nivel inte
 | 1 | 1 | Comunidad, pacto y repaso del nivel básico | En clase |
 | 2 | 1 | Del negocio a la infraestructura: DDD, draft de arquitectura y atributos de calidad | En clase |
 | 3 | 2 | Del draft al contenedor: Docker paso a paso | [`clases/clase-03`](clases/clase-03/README.md) |
-| 4 | 2 | Integración continua con GitHub Actions | Próximamente |
+| 4 | 2 | Integración continua con GitHub Actions | [`clases/clase-04`](clases/clase-04/README.md) |
 | 5–6 | 3 | Despliegue, reversión e infraestructura como código | Próximamente |
 | 7–8 | 4 | Redes, exposición del servicio y observabilidad | Próximamente |
 | 9–10 | 5 | Auditoría, portafolio y defensa | Próximamente |
@@ -23,7 +23,10 @@ clases/
   clase-03/
     README.md          guía del estudiante y ejercicios de la clase
     villa-nube/        el laboratorio tal como queda al final de esa clase
-  clase-04/            (próximamente) el laboratorio con lo de la Clase 3 + lo nuevo
+  clase-04/
+    README.md          guía del estudiante de la Clase 4
+    villa-nube/        lo de la Clase 3 + pruebas automáticas (ci/, fallas-ci/)
+.github/workflows/     los workflows de GitHub Actions (Clase 4 en adelante)
 .devcontainer/         entorno de GitHub Codespaces para todo el curso
 ```
 

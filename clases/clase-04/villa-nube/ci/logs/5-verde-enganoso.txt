@@ -1,0 +1,24 @@
+Ejecución guardada · Clase 4 · Villa Nube CI · resultado: VERDE (¿de verdad?)
+Disparador: push a main · commit 9f8e7d6 «Que el CI no moleste»
+Cambio del commit (.github/workflows/clase-04-villa-nube.yml):
+-        run: pytest -v
++        run: pytest -v || true
+Y en app/app.py la vigencia volvió a 900 días.
+
+=== Job: Pruebas del código ✓ (30 s) ===
+✓ Set up job
+✓ Descargar el código del repositorio
+✓ Instalar Python 3.12
+✓ Instalar las librerías
+✓ Correr las pruebas
+  Run pytest -v || true
+  ...
+  tests/test_app.py::test_documento_vencido_se_rechaza FAILED              [ 80%]
+  ...
+  FAILED tests/test_app.py::test_documento_vencido_se_rechaza - assert 201 == 422
+  ========================= 1 failed, 4 passed in 0.13s ==========================
+✓ Complete job
+
+=== Job: Imagen y prueba de humo ✓ (1 min 10 s) ===
+  ...
+  Resultado: 5 pasaron, 0 fallaron

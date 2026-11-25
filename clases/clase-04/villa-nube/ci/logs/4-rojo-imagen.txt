@@ -1,0 +1,35 @@
+Ejecución guardada · Clase 4 · Villa Nube CI · resultado: ROJO
+Disparador: push a main · commit 1a2b3c4 «Escucha solo en local»
+Cambio del commit (Dockerfile, última línea):
+-   CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} --workers 2 --access-logfile - app:app"]
++   CMD ["sh", "-c", "exec gunicorn --bind 127.0.0.1:${PORT} --workers 2 --access-logfile - app:app"]
+
+=== Job: Pruebas del código ✓ (33 s) ===
+  ...
+  ============================== 5 passed in 0.14s ===============================
+
+=== Job: Imagen y prueba de humo ✗ (1 min 18 s) ===
+✓ Set up job
+✓ Descargar el código del repositorio
+✓ Construir la imagen
+✓ Encender el contenedor
+✗ Prueba de humo
+  Run bash scripts/verificar.sh
+  Verificando http://localhost:8080
+  P1 · El servicio está vivo e informa su versión
+    ✘ /salud → 000
+  P2 · El servicio está listo: su base de datos responde
+    ✘ /listo → 000
+  P3 · Un ciudadano radica una solicitud y puede consultarla
+    ✘ POST /solicitudes → 000
+  P4 · La regla del negocio se cumple: un documento vencido se rechaza
+    ✘ documento vencido → 000 (se esperaba 422)
+
+  Resultado: 0 pasaron, 4 fallaron
+  Error: Process completed with exit code 1.
+✓ Logs del contenedor (si algo falló)
+  Run docker logs vn
+  [2026-11-24 15:02:11 +0000] [1] [INFO] Starting gunicorn 27.0.1
+  [2026-11-24 15:02:11 +0000] [1] [INFO] Listening at: http://127.0.0.1:8080 (1)
+  [2026-11-24 15:02:11 +0000] [7] [INFO] Booting worker with pid: 7
+✓ Complete job

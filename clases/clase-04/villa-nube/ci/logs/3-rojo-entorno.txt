@@ -1,0 +1,17 @@
+Ejecución guardada · Clase 4 · Villa Nube CI · resultado: ROJO
+Disparador: push a main · commit 7c8d9e0 «Limpia el workflow»
+Cambio del commit (.github/workflows/clase-04-villa-nube.yml): se borró el paso
+"Instalar las librerías".
+
+=== Job: Pruebas del código ✗ (22 s) ===
+✓ Set up job
+✓ Descargar el código del repositorio
+✓ Instalar Python 3.12
+✗ Correr las pruebas
+  Run pytest -v
+  /home/runner/work/_temp/3f2a.sh: line 1: pytest: command not found
+  Error: Process completed with exit code 127.
+✓ Complete job
+
+=== Job: Imagen y prueba de humo ⊘ (omitido) ===
+  Este job no corrió: depende de "Pruebas del código", que falló.

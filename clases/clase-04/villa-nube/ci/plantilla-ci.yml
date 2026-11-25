@@ -1,0 +1,51 @@
+# Ejercicio 4 · Completa el workflow
+# Cambia cada ___ por una palabra del banco. Cada palabra se usa una vez.
+#
+# Banco de palabras:
+#   push · ubuntu-latest · actions/checkout@v6 · "3.12" · pytest -v · docker build · pruebas
+#
+# Para probarlo en tu fork: guárdalo como .github/workflows/mi-ci.yml
+# (en la raíz del repositorio, no dentro de esta carpeta).
+
+name: Mi primer CI
+
+# 1. ¿Cuándo corre? Cada vez que subo un cambio
+on:
+  ___:
+    paths:
+      - "clases/clase-04/villa-nube/**"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: clases/clase-04/villa-nube
+
+jobs:
+  pruebas:
+    # 2. ¿En qué máquina corre? Una Linux que presta GitHub
+    runs-on: ___
+    steps:
+      # 3. Primero hay que descargar el código
+      - uses: ___
+
+      # 4. ¿Qué versión de Python instalamos?
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ___
+
+      - run: pip install -r app/requirements.txt -r requirements-dev.txt
+
+      # 5. ¿Qué comando corre las pruebas?
+      - run: ___
+
+  imagen:
+    # 6. Este job espera a que otro termine en verde. ¿Cuál?
+    needs: ___
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # 7. ¿Qué comando construye la imagen?
+      - run: ___ -t villa-nube/tramites:${{ github.sha }} .

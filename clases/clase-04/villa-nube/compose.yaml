@@ -1,0 +1,46 @@
+# Villa Nube · entorno local reproducible
+# Equivale, en pequeño, a: aplicación + base de datos gestionada del draft (Clase 2).
+#   docker compose up -d --build
+#   ./scripts/verificar.sh
+name: villa-nube
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        APP_VERSION: "1.0.0"
+    image: villa-nube/tramites:1.0.0
+    env_file: .env            # la configuración vive fuera de la imagen
+    environment:
+      DB_HOST: db             # el nombre del servicio es su nombre DNS en la red
+      DB_PORT: "5432"
+    ports:
+      - "8080:8080"           # solo la API se publica hacia el equipo anfitrión
+    depends_on:
+      db:
+        condition: service_healthy   # esperar a que la BD ACEPTE conexiones, no solo a que arranque
+    restart: unless-stopped
+    networks: [interna]
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - datos-tramites:/var/lib/postgresql/data   # los datos sobreviven al contenedor
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    # Sin "ports": la base de datos NO queda expuesta fuera de la red interna.
+    networks: [interna]
+
+volumes:
+  datos-tramites:
+
+networks:
+  interna:
