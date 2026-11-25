@@ -17,7 +17,7 @@ En la Clase 3 un compañero encendió tu proyecto siguiendo tu README. Hoy ese t
 - [ ] Tienes a mano tus dos pruebas «Si hago ___, debo ver ___» de la Clase 3.
 - [ ] Viste Platzi M1 · CI/CD, o al menos su primera parte.
 
-**¿No subiste tu proyecto a GitHub?** No pasa nada: hoy trabajas con Villa Nube en tu fork y declaras en tu evidencia que usaste el caso del curso.
+**¿No tienes un proyecto propio o no lo subiste a GitHub?** No pasa nada: el repositorio del curso trae proyectos de práctica en la carpeta `proyectos/`. Eliges uno en el ejercicio 7 y lo usas como si fuera tuyo.
 
 **Las 8 palabras de hoy**
 
@@ -219,22 +219,33 @@ Regla corta: **lo sensible va en un secreto; lo que no es sensible pero cambia, 
 
 ## Ejercicio 7 · Tu proyecto con CI
 
-*Individual o con tu equipo de proyecto · 45 minutos.* Ahora lo haces en el repositorio de tu proyecto, el de la Clase 3.
+*Individual o con tu equipo de proyecto · 45 minutos.* Ahora lo haces en tu proyecto: el tuyo de la Clase 3 o uno de los proyectos de práctica del curso.
+
+**Paso 0 · Elige tu proyecto.** Si ya tienes el tuyo en GitHub con un Dockerfile, úsalo. Si no, elige uno de estos. Están en la carpeta `proyectos/` de tu fork y cada uno tiene un README con el negocio, dos pruebas para empezar y los valores para la plantilla.
+
+| Proyecto | Tecnología | El negocio | Carpeta |
+| --- | --- | --- | --- |
+| Mercado Raíces | Python · Flask | Una cooperativa campesina recibe pedidos de tiendas de barrio | `proyectos/mercado-raices` |
+| BiciBarrio | Node.js · Express | Una junta de acción comunal presta bicicletas en tres estaciones | `proyectos/bici-barrio` |
+| Biblioteca La Esquina | Sitio estático (HTML, CSS, JavaScript) | Una biblioteca comunitaria publica su catálogo | `proyectos/biblioteca-barrio` |
+
+Usar un proyecto de práctica es válido: lo que se evalúa es lo que haces con él. Escríbelo en tu evidencia.
 
 **Paso 1 · Elige tu plantilla.** Están en `clases/clase-04/villa-nube/ci/plantillas/` del repositorio del curso.
 
 | Tu proyecto… | Usa |
 | --- | --- |
-| Tiene Dockerfile, pero todavía no tiene pruebas automáticas (cualquier lenguaje, también sitios estáticos) | `ci-docker.yml` |
-| Es Python y tiene pruebas con pytest | `ci-python.yml` |
-| Es Node.js y tiene `npm test` | `ci-node.yml` |
-| Todavía no tiene Dockerfile | Haz primero el ejercicio 7 de la Clase 3, o trabaja con Villa Nube en tu fork |
+| Tiene Dockerfile, pero todavía no tiene pruebas automáticas (cualquier lenguaje, también sitios estáticos). Biblioteca La Esquina | `ci-docker.yml` |
+| Es Python y tiene pruebas con pytest. Mercado Raíces | `ci-python.yml` |
+| Es Node.js y tiene `npm test`. BiciBarrio | `ci-node.yml` |
+| Es tuyo y todavía no tiene Dockerfile | Elige hoy un proyecto de práctica y deja tu Dockerfile como pendiente |
 
-**Paso 2 · Créala en tu repositorio, desde el navegador.** En tu repositorio: **Add file** → **Create new file** → nombre `.github/workflows/ci.yml` → pega la plantilla.
+**Paso 2 · Créala desde el navegador.** **Add file** → **Create new file** → pega la plantilla. El nombre del archivo: en tu repositorio, `.github/workflows/ci.yml`; en tu fork, con un proyecto de práctica, `.github/workflows/<nombre-del-proyecto>.yml` (por ejemplo `.github/workflows/mercado-raices.yml`).
 
 **Paso 3 · Cambia lo que dice CAMBIA.**
 
-- El puerto de tu aplicación dentro del contenedor (`PUERTO_APP`).
+- La carpeta donde está el Dockerfile (`working-directory`): `"."` en tu repositorio, o la carpeta del proyecto de práctica, por ejemplo `"proyectos/mercado-raices"`.
+- El puerto de la aplicación dentro del contenedor (`PUERTO_APP`).
 - Tu prueba 1 de la Clase 3: la ruta que se abre y un texto que debe aparecer en la respuesta.
 - Tu prueba 2, o borra ese paso si todavía no la tienes.
 
@@ -264,7 +275,7 @@ Si algo falla, el check queda en rojo y el cambio no se considera listo.
 Lo que todavía NO se valida: [por ejemplo: la base de datos, el despliegue, la seguridad]
 ```
 
-**¿Sin proyecto propio?** Trabaja en tu fork: agrega a `scripts/verificar.sh` de Villa Nube una prueba nueva (por ejemplo, que `GET /solicitudes` responda 200) y escribe la sección «Cómo se valida» en el README de la carpeta. Es válido; decláralo.
+**Si usas un proyecto de práctica,** su README trae los valores de cada CAMBIA, dos pruebas para empezar y un rojo para provocar en el paso 5. Escribe la sección «Cómo se valida» en el README de la carpeta del proyecto.
 
 **Minuto 35.** Asegúrate de tener la ejecución roja y la verde: en 10 minutos otra persona va a revisar tu workflow.
 

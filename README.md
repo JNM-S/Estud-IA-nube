@@ -16,6 +16,10 @@ Repositorio de trabajo del curso **Capa 2 · Arquitectura en la nube, nivel inte
 | 7–8 | 4 | Redes, exposición del servicio y observabilidad | Próximamente |
 | 9–10 | 5 | Auditoría, portafolio y defensa | Próximamente |
 
+## ¿No tienes proyecto propio?
+
+En [`proyectos/`](proyectos/README.md) hay tres proyectos de práctica para elegir y usar en las clases: **Mercado Raíces** (Python), **BiciBarrio** (Node.js) y **Biblioteca La Esquina** (sitio estático). Cada uno tiene un negocio, una regla, pruebas y un Dockerfile.
+
 ## Cómo está organizado
 
 ```
@@ -27,6 +31,7 @@ clases/
     README.md          guía del estudiante de la Clase 4
     villa-nube/        lo de la Clase 3 + pruebas automáticas (ci/, fallas-ci/)
 .github/workflows/     los workflows de GitHub Actions (Clase 4 en adelante)
+proyectos/             proyectos de práctica para quien no tiene uno propio
 .devcontainer/         entorno de GitHub Codespaces para todo el curso
 ```
 
