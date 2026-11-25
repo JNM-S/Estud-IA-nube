@@ -62,7 +62,7 @@ Ejemplo con Villa Nube: «Si alguien cambia la regla de los 90 días, la prueba 
 
 **Paso 3 · Corre el workflow a mano.** Elige **Clase 4 · Villa Nube CI** → **Run workflow** → **Run workflow**.
 
-- [ ] Aparece una ejecución con un círculo amarillo que gira y, unos minutos después, un ✅ verde.
+- [ ] Aparece una ejecución con un círculo amarillo que gira y, en uno o dos minutos, un ✅ verde.
 
 **Paso 4 · Lee el log.** Haz clic en la ejecución, luego en el job **Pruebas del código** y abre el paso **Correr las pruebas**.
 
